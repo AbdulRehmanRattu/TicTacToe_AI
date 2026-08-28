@@ -1,104 +1,124 @@
-
-# Tic-Tac-Toe Game with AI Opponent
-
-This project implements a Tic-Tac-Toe game in Python, featuring an AI opponent powered by the Minimax algorithm. The game includes a graphical user interface (GUI) built using the Pygame library, allowing players to challenge an optimally playing AI.
-
-## Table of Contents
-- [Overview](#overview)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Game Mechanics](#game-mechanics)
-- [AI Implementation](#ai-implementation)
-- [Testing and Results](#testing-and-results)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+# Tic-Tac-Toe Optimal Adversarial AI Engine (Minimax with Alpha-Beta Pruning)
 
 ## Overview
-The Tic-Tac-Toe game is a classic two-player game where players take turns marking spaces in a 3x3 grid with X or O. The goal is to place three of your marks in a horizontal, vertical, or diagonal row before your opponent. This project enhances the traditional game by introducing an AI opponent that uses the Minimax algorithm to play optimally.
 
-## Features
-- Simple and intuitive GUI using Pygame
-- Play against an AI opponent using the Minimax algorithm
-- AI ensures at least a draw with optimal play
-- Detailed game state management and analysis
-- Performance testing and outcome reporting
+This project implements an optimal, mathematically unbeatable game engine for Tic-Tac-Toe using pure game-theoretic Minimax decision algorithms with Alpha-Beta pruning, wrapped in an interactive Pygame graphical user interface.
 
-## Installation
-To run this project locally, follow these steps:
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/tictactoe-ai.git
-   ```
-
-2. **Navigate to the project directory:**
-   ```bash
-   cd tictactoe-ai
-   ```
-
-3. **Install the required dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-## Usage
-To start the game, run the following command:
-```bash
-python tictactoe.py
-```
-The GUI will launch, and you can start playing by clicking on the grid to place your mark.
-
-## Game Mechanics
-The game consists of several key functions to manage the game state:
-
-- **initial_state**: Initializes the game board as a 3x3 grid of `None` values.
-- **player**: Determines the current player's turn based on the count of X and O on the board.
-- **actions**: Returns all possible moves available on the board as tuples (i, j).
-- **result**: Calculates the board state resulting from a player's move, ensuring validity.
-- **winner**: Checks for a winning condition by evaluating rows, columns, and diagonals.
-- **terminal**: Determines if the game has ended by win or draw.
-- **utility**: Assigns a numerical value to the game's end state: 1 for a win by X, -1 for a win by O, and 0 for a draw.
-
-## AI Implementation
-The core of the AI is the Minimax algorithm, which evaluates all possible future game states and selects the move that maximizes the AI's chance of winning while minimizing the opponent's chance. The algorithm ensures that the AI can secure a draw at minimum when playing optimally.
-
-## Testing and Results
-The AI was tested in a series of ten games, with the following outcomes:
-
-- **User as X**:
-  - Total Games: 6
-  - Wins: 0
-  - Ties: 6
-  - Losses: 0
-
-- **User as O**:
-  - Total Games: 4
-  - Wins: 0
-  - Ties: 2
-  - Losses: 2
-
-The results demonstrate the effectiveness of the Minimax algorithm in ensuring a draw or better when the AI plays optimally.
-
-## Contributing
-Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are gladly accepted.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-For any questions or inquiries, please contact:
-
-- **Email**: rattu786.ar@gmail.com
-- **LinkedIn**: [Abdul Rehman Rattu](https://www.linkedin.com/in/abdul-rehman-rattu-395bba237)
+The AI agent exhaustively maps the discrete game state space to ensure it never loses a match, achieving optimal play against any human strategy whether playing first (as X) or second (as O).
 
 ---
 
-Thank you for using this Tic-Tac-Toe game project! Enjoy playing and exploring the AI opponent.
+
+---
+
+## Problem Statement
+
+Adversarial game-playing requires decision agents to evaluate prospective game trajectories and make mathematically optimal choices under zero-sum conditions. Developing game engines that guarantee zero-loss outcomes requires implementing exhaustive game-tree search algorithms (Minimax) optimized with Alpha-Beta pruning to eliminate suboptimal recursive branches and maintain instant response latency within an interactive graphical user interface.
+
+## Architectural Workflow
+
+The game engine separates pure game state logic from graphical presentation:
+
+```
+ +--------------------------------+
+ | Pygame GUI (runner.py) |
+ +--------------------------------+
+ |
+ v
++--------------------------------------------------------------------+
+| Game Engine (tictactoe.py) |
+| |
+| [ State Modeling ] [ Action Space ] [ Transitions ] |
+| initial_state() actions(board) result(board, a) |
+| |
+| [ Terminal Conditions ] [ Utility Value ] |
+| winner(board) / terminal(board) +1 (X) / -1 (O) |
+| |
+| +--------------------------------------------------------------+ |
+| | Recursive Minimax AI Engine | |
+| | max_value(board, alpha, beta) <-> min_value() | |
+| +--------------------------------------------------------------+ |
++--------------------------------------------------------------------+
+```
+
+---
+
+## Key Features
+
+- **Pure Functional State Transition**: State transitions are immutable (`result(board, action)` returns a new cloned board), ensuring tree search isolation without side-effects.
+- **Unbeatable Minimax Decision Engine**: Recursively traverses the game tree to maximize player score while assuming optimal counter-play from the adversary.
+- **Alpha-Beta Pruning Optimization**: Tracks `alpha` (best guaranteed score for maximizer) and `beta` (best guaranteed score for minimizer), cutting redundant recursive branches when `alpha >= beta`.
+- **Flexible Play Modes**: Choose to play as X (First Player) or O (Second Player) against the AI agent.
+- **Interactive Pygame GUI**: Clean typography, responsive grid clicks, real-time status banners, and seamless restart controls.
+
+---
+
+## Technical Specifications
+
+| Parameter | Specification |
+| :--- | :--- |
+| **Language** | Python 3.8+ |
+| **GUI Framework** | Pygame 2.5+ |
+| **Algorithm** | Minimax with Alpha-Beta Pruning |
+| **State Space** | 5,478 reachable game states |
+| **Optimality** | Mathematically unbeatable (zero loss probability) |
+
+## System Architecture and Workflow
+
+| Concept | Formal Definition | Value in Engine |
+| :--- | :--- | :---: |
+| **Terminal Utility (X Win)** | $U(s) = +1$ | Maximizer Victory |
+| **Terminal Utility (O Win)** | $U(s) = -1$ | Minimizer Victory |
+| **Terminal Utility (Draw)** | $U(s) = 0$ | Neutral Tie State |
+| **Total Reachable States** | $3^9 = 19,683$ upper bound | $5,478$ valid game states |
+| **Optimality Guarantee** | Complete zero-sum equilibrium | Zero probability of AI loss |
+
+---
+
+## Project Structure
+
+```
+tictactoe-minimax-ai/
+├── tictactoe.py # Core game state mechanics and Minimax algorithm
+├── runner.py # Pygame graphical desktop interface
+├── OpenSans-Regular.ttf # Typography assets for UI rendering
+├── requirements.txt # Environment dependencies
+└── README.md # Technical documentation
+```
+
+---
+
+## Installation and Environment Setup
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/AbdulRehmanRattu/TicTacToe_AI.git
+cd TicTacToe_AI
+```
+
+### 2. Configure Environment
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### 3. Requirements Specification (`requirements.txt`)
+```
+pygame>=2.5.0
+```
+
+---
+
+## Usage Guide
+
+Launch the game application:
+```bash
+python runner.py
+```
+
+### Gameplay Instructions
+1. Select your desired symbol: **Play as X** (First Move) or **Play as O** (Second Move).
+2. Click on any valid empty cell in the 3x3 grid to make your move.
+3. The AI will compute its optimal countermove.
+4. Upon game conclusion, the winner or tie banner is displayed with a **Play Again** prompt.
