@@ -1,5 +1,19 @@
 # Tic-Tac-Toe Optimal Adversarial AI Engine (Minimax with Alpha-Beta Pruning)
 
+<div align="center">
+
+[<img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License">](https://opensource.org/licenses/Apache-2.0)
+<img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen.svg" alt="Status">
+
+**Enterprise-grade, high-performance implementation built and maintained by Abdul Rehman Rattu.**
+
+[Overview](#overview) • [Key Features](#key-features) • [Installation & Usage](#quickstart--usage) • [Author & Maintainer](#author--maintainer)
+
+</div>
+
+---
+
 ## Overview
 
 This project implements an optimal, mathematically unbeatable game engine for Tic-Tac-Toe using pure game-theoretic Minimax decision algorithms with Alpha-Beta pruning, wrapped in an interactive Pygame graphical user interface.
@@ -7,7 +21,6 @@ This project implements an optimal, mathematically unbeatable game engine for Ti
 The AI agent exhaustively maps the discrete game state space to ensure it never loses a match, achieving optimal play against any human strategy whether playing first (as X) or second (as O).
 
 ---
-
 
 ---
 
@@ -122,3 +135,15 @@ python runner.py
 2. Click on any valid empty cell in the 3x3 grid to make your move.
 3. The AI will compute its optimal countermove.
 4. Upon game conclusion, the winner or tie banner is displayed with a **Play Again** prompt.
+
+---
+
+## Author & Maintainer
+
+**Abdul Rehman Rattu**  
+*Forward Deployed AI Engineer & Solutions Architect*  
+*Founder & Technical Lead, Rapide Technologies*
+
+* **Email**: [rattu786.ar@gmail.com](mailto:rattu786.ar@gmail.com)
+* **LinkedIn**: [linkedin.com/in/abdul-rehman-rattu-395bba237](https://www.linkedin.com/in/abdul-rehman-rattu-395bba237)
+* **GitHub**: [github.com/AbdulRehmanRattu](https://github.com/AbdulRehmanRattu)
